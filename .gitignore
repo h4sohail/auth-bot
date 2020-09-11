@@ -2,3 +2,4 @@ venv
 .vscode
 students.json
 log.json
+__pycache__
