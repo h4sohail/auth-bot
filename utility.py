@@ -19,9 +19,9 @@ def send_email(user, pwd, recipient, subject, body):
         server.login(user, pwd)
         server.sendmail(FROM, TO, message)
         server.close()
-        print('successfully sent the mail')
+        print("Successfully sent the email")
     except:
-        print("failed to send mail")
+        print("Failed to send the email")
 
 def generate_hash():
     return secrets.token_hex(32)
