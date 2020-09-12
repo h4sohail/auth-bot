@@ -1,4 +1,4 @@
-# Authenticated Bot
+# Authentication Bot
 
 An authentication bot that verifies Discord users using the university email address of students
 
