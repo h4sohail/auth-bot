@@ -67,7 +67,7 @@ async def on_member_join(member):
         authorized.add(member.id)
         log[member.id] = students[student_id]["Email"]
         keys.discard(hashed_id)
-        with open("log.json", "a") as outfile:
+        with open("log.json", "w") as outfile:
             json.dump(log, outfile)
     else:
         await member.send("The key is incorrect")
