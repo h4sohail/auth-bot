@@ -19,7 +19,6 @@ def send_email(user, pwd, recipient, subject, body):
         server.login(user, pwd)
         server.sendmail(FROM, TO, message)
         server.close()
-        print("Successfully sent the email")
     except:
         print("Failed to send the email")
 
