@@ -30,13 +30,13 @@ async def on_member_join(member):
     student_id = response.content.strip().replace(" ", "")
     
     if not student_id.isnumeric():
-        await member.send("Incorrect Student ID")
+        await member.send("Incorrect Student ID, you have been kicked from the Discord.\nTo try again, rejoin the server using https://discord.gg/5njUWbK")
         print(f"Failed to authenticate {member.name}")
         await member.kick()
         return
 
     if student_id not in students:
-        await member.send("You are not enrolled in this class")
+        await member.send("You are not enrolled in this class, you have been kicked from the Discord.\nTo try again, rejoin the server using https://discord.gg/5njUWbK")
         print(f"Failed to authenticate {member.name}")
         await member.kick()
         return
@@ -52,7 +52,7 @@ async def on_member_join(member):
         keys.add(key)
 
     send_email("discord.auth.bot@gmail.com", email_password, students[student_id]["Email"], "Discord Auth Key", f"{key}")
-    await member.send("Please check your Carleton email for a key, and enter it")
+    await member.send("Please check your Carleton email for a key, copy and paste it back here")
     response = await client.wait_for("message", check=message_check(channel=member.dm_channel))
     hashed_id = response.content.strip().replace(" ", "")
 
@@ -61,7 +61,8 @@ async def on_member_join(member):
         await member.add_roles(role)
         first_name = students[student_id]["First Name"]
         await member.edit(nick=first_name)
-        print(f"Successfully to authenticated {member.name}")
+        await member.send("You have been authenticated successfully and can now browse and interact with the Discord server.")
+        print(f"Successfully authenticated {member.name}")
         
         # Book keeping
         authorized.add(member.id)
@@ -70,7 +71,7 @@ async def on_member_join(member):
         with open("log.json", "w") as outfile:
             json.dump(log, outfile)
     else:
-        await member.send("The key is incorrect")
+        await member.send("The key is incorrect, you have been kicked from the Discord.\nTo try again, rejoin the server using https://discord.gg/5njUWbK")
         await member.kick()
         print(f"Failed to authenticate {member.name}")
         return
