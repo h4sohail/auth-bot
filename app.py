@@ -59,7 +59,7 @@ async def on_member_join(member):
     if hashed_id in keys:
         role = get(member.guild.roles, name="Student")
         await member.add_roles(role)
-        first_name = students[student_id]["First Name"]
+        first_name = students[student_id]["First Name"].title()
         await member.edit(nick=first_name)
         await member.send("You have been authenticated successfully and can now browse and interact with the Discord server.")
         print(f"Successfully authenticated {member.name}")
