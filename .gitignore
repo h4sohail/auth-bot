@@ -1,5 +1,9 @@
+# folders
 venv
 .vscode
+__pycache__
+
+# files
 students.json
 log.json
-__pycache__
+
