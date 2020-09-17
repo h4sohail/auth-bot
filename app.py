@@ -14,7 +14,7 @@ token = args["token"]
 
 keys = set() # set of keys generated
 log = {} # log file for keeping track of discord IDs and related emails
-authorized = set() # set of authorized users
+authenticated = set() # set of authenticated users
 
 client = commands.Bot(command_prefix="!")
 
@@ -25,7 +25,7 @@ with open('students.json') as json_file:
 @client.event
 async def on_member_join(member):
     print(f"Trying to authenticate {member.name}")
-    await member.send("Please enter your Student ID to get authorized")
+    await member.send("Please enter your Student ID to get authenticated")
     response = await client.wait_for("message", check=message_check(channel=member.dm_channel))
     student_id = response.content.strip().replace(" ", "")
     
@@ -41,8 +41,8 @@ async def on_member_join(member):
         await member.kick()
         return
 
-    if member.id in authorized:
-        await member.send("You are already authorized")
+    if member.id in authenticated:
+        await member.send("You are already authenticated")
         print(f"{member.name} is already authenticated")
         return
 
@@ -65,7 +65,7 @@ async def on_member_join(member):
         print(f"Successfully authenticated {member.name}")
         
         # Book keeping
-        authorized.add(member.id)
+        authenticated.add(member.id)
         log[member.id] = students[student_id]["Email"]
         keys.discard(hashed_id)
         with open("log.json", "w") as outfile:
@@ -79,6 +79,6 @@ async def on_member_join(member):
 @client.event
 async def on_member_remove(member):
     print(f"{member.name} left, removed from authenticated users") 
-    authorized.discard(member.id)
+    authenticated.discard(member.id)
 
 client.run(token)
