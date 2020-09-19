@@ -2,8 +2,6 @@ import json, smtplib, ssl, hashlib, secrets
 from collections.abc import Sequence
 
 def send_email(user, pwd, recipient, subject, body):
-    import smtplib
-
     FROM = user
     TO = recipient if isinstance(recipient, list) else [recipient]
     SUBJECT = subject
