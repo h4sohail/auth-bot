@@ -23,7 +23,9 @@ For security reasons the actual process of getting university emails from a stud
 
 # Instructions to use the Bot
 
-To run the bot first install the requirements using: ```pip install -r requirements.txt```
+Create a role called "Student" and setup the permissions such that you need this role to interact on the Discord server.
+
+Install the requirements using: ```pip install -r requirements.txt```
 
 Create a "students.json" with the data retrieved from your course webpage.
 
