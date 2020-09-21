@@ -27,7 +27,7 @@ To run the bot first install the requirements using: ```pip install -r requireme
 
 Create a "students.json" with the data retrieved from your course webpage.
 
-Run the bot using: ```python3 app.py --email_pass email_password --token discord_bot_token```
+Run the bot using: ```python3 app.py --email_pass email_password_here --token discord_bot_token_here```
 
 https://discordpy.readthedocs.io/en/latest/
 https://discord.com/developers/docs/intro
